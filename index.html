@@ -554,7 +554,6 @@
       color: var(--gray);
     }
 
-    .bs-r {}
 
     .bs-quote {
       font-family: 'Cormorant Garamond', serif;
@@ -701,25 +700,27 @@
       gap: 14px;
       position: relative;
       overflow: hidden;
-      transition: border-color .35s, transform .35s cubic-bezier(.23,1,.32,1), box-shadow .35s;
+      transition: border-color .35s, transform .35s cubic-bezier(.23, 1, .32, 1), box-shadow .35s;
       cursor: default;
     }
 
     .mcard::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 2px;
       background: var(--black);
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform .4s cubic-bezier(.23,1,.32,1);
+      transition: transform .4s cubic-bezier(.23, 1, .32, 1);
     }
 
     .mcard:hover {
       border-color: var(--mid);
       transform: translateY(-3px);
-      box-shadow: 0 12px 36px rgba(0,0,0,0.07);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.07);
     }
 
     .mcard:hover::before {
@@ -729,11 +730,12 @@
     /* card accent kanji watermark */
     .mcard-kanji {
       position: absolute;
-      bottom: -8px; right: 10px;
+      bottom: -8px;
+      right: 10px;
       font-family: 'Shippori Mincho', serif;
       font-size: 56px;
       font-weight: 700;
-      color: rgba(0,0,0,0.04);
+      color: rgba(0, 0, 0, 0.04);
       line-height: 1;
       pointer-events: none;
       user-select: none;
@@ -900,7 +902,6 @@
       flex-shrink: 0;
     }
 
-    .feat-info {}
 
     .feat-title {
       font-size: 11px;
@@ -1967,8 +1968,6 @@
         min-height: 180px;
       }
 
-      .visit-sec {}
-
       footer {
         flex-direction: column;
         gap: 20px;
@@ -2055,7 +2054,6 @@
       grid-row: span 2;
     }
 
-    .sitem-portrait {}
 
     .sitem-inner {
       width: 100%;
@@ -2324,67 +2322,89 @@
 
     <div class="menu-panel active" id="tab-hot">
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Espresso / Doppio</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Espresso / Doppio</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Pure, bold, and unapologetic.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Americano (Hot/Iced)</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Americano (Hot/Iced)</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Espresso with hot water. Simple perfection.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Cappuccino (Hot)</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Cappuccino (Hot)</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Equal parts espresso, steamed milk, and velvety foam.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Latte (Hot/Iced)</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Latte (Hot/Iced)</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Smooth espresso with steamed milk. Your daily comfort.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Cortado (Hot)</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Cortado (Hot)</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Balanced espresso and milk in perfect harmony.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Flat White (Hot)</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Flat White (Hot)</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Velvety microfoam with double shots. Melbourne style.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Mocha (Hot/Iced)</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Mocha (Hot/Iced)</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Espresso, steamed milk, and rich chocolate. Blissful.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Spanish Latte (Hot/Iced)</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Spanish Latte (Hot/Iced)</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Espresso with sweetened condensed milk. Indulgent and smooth.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Matcha Latte</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Matcha Latte</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Whisked matcha with steamed milk. Earthy and energizing.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Hot Chocolate</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Hot Chocolate</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Rich, creamy, pure indulgence.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Cold Brew</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Cold Brew</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Smooth, refreshing, made fresh daily.</p>
         <span class="mcard-kanji">星</span>
@@ -2392,19 +2412,25 @@
     </div>
     <div class="menu-panel" id="tab-cold">
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Pistachio</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Pistachio</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Creamy pistachio gelato drowned in hot espresso.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Vanilla</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Vanilla</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Classic vanilla gelato with a shot of bold espresso.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Matcha</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Matcha</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Earthy matcha gelato with espresso pour. Unique fusion.</p>
         <span class="mcard-kanji">星</span>
@@ -2412,55 +2438,73 @@
     </div>
     <div class="menu-panel" id="tab-sigs">
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Sunrise Espresso</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Sunrise Espresso</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Our signature blend. Golden, bright, and energizing.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Grapefruit Espresso</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Grapefruit Espresso</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Citrus notes with bold espresso. Refreshingly bold.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Cranberry Espresso</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Cranberry Espresso</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Tart and fruity. A unique coffee experience.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Strawberry Cold Brew</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Strawberry Cold Brew</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Smooth cold brew with strawberry sweetness.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Kokum Cold Brew</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Kokum Cold Brew</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Tangy, tropical cold brew. A taste of India.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Cherry Cold Brew</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Cherry Cold Brew</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Dark cherry notes with smooth cold brew.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Lemonade Cold Brew</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Lemonade Cold Brew</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Zesty lemon with chilled espresso. Perfect for summer.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Sunset Matcha</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Sunset Matcha</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Whisked matcha with vanilla. Smooth and earthy.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Seasonal Matcha</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Seasonal Matcha</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Rotating seasonal flavors. Ask for today's special.</p>
         <span class="mcard-kanji">星</span>
@@ -2468,43 +2512,57 @@
     </div>
     <div class="menu-panel" id="tab-exp">
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Miso Iced Latte</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Miso Iced Latte</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Umami espresso with miso creaminess. Avant-garde.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Vietnamese Latte With Salted</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Vietnamese Latte With Salted</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Condensed milk with espresso and sea salt. Bold balance.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Milk Foam</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Milk Foam</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Silky microfoam with seasonal syrups. Cloud-like.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Miro Matcha</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Miro Matcha</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Artistic matcha blend. Instagram-worthy and delicious.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Banana Matcha</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Banana Matcha</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Creamy banana with earthy matcha. Smooth fusion.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Pineapple Matcha</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Pineapple Matcha</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Tropical pineapple with green tea notes. Unexpected.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Black Sesame Matcha</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Black Sesame Matcha</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Nutty black sesame with matcha richness. Complex.</p>
         <span class="mcard-kanji">星</span>
@@ -2512,43 +2570,57 @@
     </div>
     <div class="menu-panel" id="tab-tea">
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Green Tea</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Green Tea</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Fresh, delicate, and calming.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Apple Cinnamon</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Apple Cinnamon</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Warm spiced apple tea. Cozy comfort.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Hibiscus</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Hibiscus</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Tart, floral, and refreshing.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Mint Chamomile</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Mint Chamomile</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Soothing blend for any time of day.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Lavender</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Lavender</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Floral and calming. Pure serenity.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Peach Tea</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Peach Tea</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Sweet and fruity peach blend.</p>
         <span class="mcard-kanji">星</span>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Lemon Tea</span></div>
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Lemon Tea</span>
+        </div>
         <div class="mcard-divider"></div>
         <p class="mcard-desc">Zesty and bright. Perfectly balanced.</p>
         <span class="mcard-kanji">星</span>
@@ -2717,7 +2789,7 @@
         <p class="vc-lbl">Find Us</p>
         <h3 class="vc-title">Visit<br>Hoshi</h3>
         <ul class="vc-address">
-          <li class="addr-bold">Guttala Begumpet, Madhapur</li>
+          <li class="addr-bold">Madhapur</li>
           <li>Survey 3P, Circle 20</li>
           <li>Hyderabad — 500 081</li>
           <li>Telangana, India</li>
