@@ -1,0 +1,2875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>星 Hoshi — Speciality Coffee · Madhapur, Hyderabad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Shippori+Mincho:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0d0d0d;
+      --white: #ffffff;
+      --off-white: #f8f7f5;
+      --cream: #f2f0ec;
+      --light: #e8e6e2;
+      --mid: #b8b4ae;
+      --gray: #6e6a65;
+      --dark-gray: #2a2a2a;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CURSOR */
+    .cur {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .cur-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--black);
+      border-radius: 50%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+    }
+
+    .cur-ring {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--black);
+      border-radius: 50%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        cursor: auto;
+      }
+
+      .cur {
+        display: none;
+      }
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 32px 64px;
+      transition: background .4s, padding .4s;
+    }
+
+    nav.scrolled {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      padding: 20px 64px;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+    .logo-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: conic-gradient(from 200deg, #f9a03f, #f05c72, #a258e3, #4f8ef7, #f9a03f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: var(--white);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .logo-mark span {
+      position: relative;
+      z-index: 1;
+      color: var(--black);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .logo-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+    }
+
+    .logo-sub {
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 10.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      font-weight: 400;
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--black);
+      transition: width .4s cubic-bezier(.77, 0, .18, 1);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 800px) {
+      nav {
+        padding: 22px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      background: var(--off-white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 160px 80px 100px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .h-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      animation: fu 1s .1s forwards;
+    }
+
+    .h-eyebrow::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--mid);
+    }
+
+    .h-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(68px, 9vw, 128px);
+      font-weight: 300;
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      opacity: 0;
+      animation: fu 1.1s .25s forwards;
+    }
+
+    .h-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(60px, 8vw, 108px);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--black);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fu 1.1s .35s forwards;
+    }
+
+    .h-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(16px, 2vw, 22px);
+      color: var(--gray);
+      margin-bottom: 8px;
+      opacity: 0;
+      animation: fu 1s .5s forwards;
+    }
+
+    .h-jp {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: var(--mid);
+      margin-bottom: 52px;
+      opacity: 0;
+      animation: fu 1s .6s forwards;
+    }
+
+    .h-cta {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      opacity: 0;
+      animation: fu 1s .8s forwards;
+    }
+
+    .btn-blk {
+      display: inline-block;
+      padding: 14px 38px;
+      background: var(--black);
+      color: var(--white);
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 400;
+      transition: background .3s;
+    }
+
+    .btn-blk:hover {
+      background: #333;
+    }
+
+    .btn-txt {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color .3s;
+    }
+
+    .btn-txt::after {
+      content: '→';
+      transition: transform .3s;
+    }
+
+    .btn-txt:hover {
+      color: var(--black);
+    }
+
+    .btn-txt:hover::after {
+      transform: translateX(5px);
+    }
+
+    .hero-right {
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hr-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 40% 55%, #181818 0%, #080808 100%);
+    }
+
+    .hr-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.65) 100%);
+    }
+
+    .hr-img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Stone + drink composition inspired by Instagram posts */
+    .hr-art {
+      position: relative;
+      z-index: 2;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .drink-coupe {
+      width: 90px;
+      height: 42px;
+      background: linear-gradient(to bottom, rgba(80, 200, 80, 0.75) 0%, rgba(210, 130, 20, 0.8) 100%);
+      border-radius: 50% 50% 4px 4px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 30px rgba(80, 200, 80, 0.1), inset 0 0 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .coupe-stem {
+      width: 2px;
+      height: 52px;
+      background: rgba(255, 255, 255, 0.15);
+      margin: 0 auto;
+    }
+
+    .coupe-base {
+      width: 42px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      margin: 0 auto;
+    }
+
+    .stone-sm {
+      width: 70px;
+      height: 28px;
+      background: linear-gradient(150deg, #6b6560, #2e2c2a);
+      border-radius: 55%;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      margin-top: 24px;
+    }
+
+    .stone-lg {
+      width: 130px;
+      height: 46px;
+      background: linear-gradient(150deg, #7a7470, #1e1c1a);
+      border-radius: 55%;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+      margin-top: -6px;
+    }
+
+    .hr-stamp {
+      position: absolute;
+      bottom: 48px;
+      right: 48px;
+      z-index: 3;
+      text-align: center;
+      opacity: 0;
+      animation: fi 1.5s 1.2s forwards;
+    }
+
+    .hr-stamp-k {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 44px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.1);
+    }
+
+    .hr-stamp-e {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.15);
+      letter-spacing: 0.1em;
+    }
+
+    .hr-ig {
+      position: absolute;
+      top: 48px;
+      left: 48px;
+      z-index: 3;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.3);
+      opacity: 0;
+      animation: fi 1s 1.5s forwards;
+    }
+
+    .hr-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      z-index: 3;
+      opacity: 0;
+      animation: fi 1s 2s forwards;
+    }
+
+    .scroll-bar {
+      width: 1px;
+      height: 56px;
+      background: rgba(255, 255, 255, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.45);
+      animation: sdrop 2s 2.5s infinite;
+    }
+
+    .scroll-lbl {
+      font-size: 8px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    /* MARQUEE */
+    .marquee {
+      overflow: hidden;
+      border-top: 1px solid var(--light);
+      border-bottom: 1px solid var(--light);
+      padding: 18px 0;
+    }
+
+    .mq-track {
+      display: flex;
+      white-space: nowrap;
+      animation: mq 24s linear infinite;
+    }
+
+    .mqi {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--black);
+      padding: 0 28px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .mqi .sep {
+      font-size: 8px;
+      color: var(--mid);
+    }
+
+    /* BRAND STATEMENT */
+    .brand-stmt {
+      padding: 110px 80px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .bs-l {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 8px;
+    }
+
+    .bs-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 96px;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--light);
+      letter-spacing: -0.03em;
+    }
+
+    .bs-lbl {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+
+    .bs-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 3.5vw, 46px);
+      font-weight: 300;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+
+    .bs-quote em {
+      font-style: italic;
+      color: var(--gray);
+    }
+
+    .bs-body {
+      font-size: 14px;
+      line-height: 1.95;
+      color: var(--gray);
+      max-width: 530px;
+    }
+
+    .bs-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 28px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--light);
+      padding-bottom: 4px;
+      transition: border-color .3s;
+    }
+
+    .bs-link:hover {
+      border-color: var(--black);
+    }
+
+    /* MENU */
+    .menu-sec {
+      background: var(--off-white);
+      padding: 110px 80px;
+    }
+
+    .sec-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 56px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .sec-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(44px, 6vw, 72px);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .sec-title em {
+      font-style: italic;
+      color: var(--gray);
+    }
+
+    .sec-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 64px;
+      font-weight: 700;
+      color: var(--light);
+      line-height: 1;
+    }
+
+    .menu-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--light);
+      overflow-x: auto;
+    }
+
+    .tab {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--gray);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      border-bottom: 2px solid transparent;
+      transition: color .3s, border-color .3s;
+      white-space: nowrap;
+    }
+
+    .tab.active {
+      color: var(--black);
+      border-bottom-color: var(--black);
+    }
+
+    .tab:hover {
+      color: var(--black);
+    }
+
+    .tab-icon {
+      width: 14px;
+      height: 14px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 6px;
+      flex-shrink: 0;
+      transition: stroke .3s;
+    }
+
+    .tab {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .menu-panel {
+      display: none;
+    }
+
+    .menu-panel.active {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* CARD */
+    .mcard {
+      background: var(--white);
+      border: 1px solid var(--light);
+      border-radius: 2px;
+      padding: 28px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .35s, transform .35s cubic-bezier(.23, 1, .32, 1), box-shadow .35s;
+      cursor: default;
+    }
+
+    .mcard::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--black);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s cubic-bezier(.23, 1, .32, 1);
+    }
+
+    .mcard:hover {
+      border-color: var(--mid);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.07);
+    }
+
+    .mcard:hover::before {
+      transform: scaleX(1);
+    }
+
+    /* card accent kanji watermark */
+    .mcard-kanji {
+      position: absolute;
+      bottom: -8px;
+      right: 10px;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 56px;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .mcard-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .veg {
+      width: 11px;
+      height: 11px;
+      border: 1.5px solid #3a8a3a;
+      border-radius: 2px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .veg::after {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: #3a8a3a;
+      border-radius: 50%;
+    }
+
+    .mcard-name {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--black);
+      letter-spacing: 0.01em;
+      line-height: 1.3;
+    }
+
+    .mcard-divider {
+      width: 24px;
+      height: 1px;
+      background: var(--light);
+      flex-shrink: 0;
+    }
+
+    .mcard-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--gray);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    @media (max-width: 1100px) {
+      .menu-panel.active {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .menu-note {
+      margin-top: 24px;
+      font-size: 11px;
+      color: var(--gray);
+      font-style: italic;
+      letter-spacing: 0.04em;
+    }
+
+    /* STILLNESS */
+    .still-sec {
+      background: var(--black);
+      color: var(--white);
+      padding: 120px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .still-bg {
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Shippori Mincho', serif;
+      font-size: 380px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.022);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .still-eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.32);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .still-eyebrow::before {
+      content: '';
+      width: 26px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .still-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+
+    .still-jp {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.28);
+      letter-spacing: 0.15em;
+      margin-bottom: 32px;
+    }
+
+    .still-body {
+      font-size: 14px;
+      line-height: 1.95;
+      color: rgba(255, 255, 255, 0.48);
+      max-width: 380px;
+    }
+
+    .feat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .feat {
+      padding: 26px 28px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      transition: border-color .3s, background .3s;
+    }
+
+    .feat:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .feat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.14);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+
+    .feat-title {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 6px;
+      font-weight: 400;
+    }
+
+    .feat-desc {
+      font-size: 12.5px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.38);
+    }
+
+    /* GALLERY */
+    .gal-hd {
+      padding: 40px 80px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .gal-hd h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+    }
+
+    .gal-hd p {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .gal-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 300px 300px;
+      gap: 2px;
+    }
+
+    .gitem {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gitem:first-child {
+      grid-row: span 2;
+    }
+
+    .gitem-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform .6s cubic-bezier(.23, 1, .32, 1);
+    }
+
+    .gitem:hover .gitem-inner {
+      transform: scale(1.04);
+    }
+
+    .g1 {
+      background: linear-gradient(160deg, #191919 0%, #090909 100%);
+    }
+
+    .g2 {
+      background: linear-gradient(140deg, #2b2b2b 0%, #101010 100%);
+    }
+
+    .g3 {
+      background: linear-gradient(160deg, #f3f1ed 0%, #e2dfd9 100%);
+    }
+
+    .g4 {
+      background: linear-gradient(160deg, #1c1c1c 0%, #0c0c0c 100%);
+    }
+
+    .g5 {
+      background: linear-gradient(140deg, #f9f8f6 0%, #efeee9 100%);
+    }
+
+    .g-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
+      opacity: 0;
+      transition: opacity .4s;
+    }
+
+    .gitem:hover .g-overlay {
+      opacity: 1;
+    }
+
+    .g-lbl {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* art elements */
+    .pour-art {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pour-stream {
+      width: 6px;
+      height: 80px;
+      background: linear-gradient(to bottom, rgba(184, 134, 11, 0.8), transparent);
+      border-radius: 3px;
+    }
+
+    .pour-dripper {
+      width: 100px;
+      height: 76px;
+      border: 2px solid rgba(255, 255, 255, 0.18);
+      border-radius: 4px 4px 30px 30px;
+    }
+
+    .pour-neck {
+      width: 4px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .pour-server {
+      width: 130px;
+      height: 90px;
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 4px 4px 44px 44px;
+    }
+
+    .g-kanji {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 90px;
+      font-weight: 700;
+      opacity: 0.13;
+    }
+
+    .stone-drink {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .s-glass {
+      width: 54px;
+      height: 72px;
+      background: linear-gradient(to bottom, rgba(60, 170, 70, 0.65), rgba(190, 110, 20, 0.75));
+      border-radius: 4px 4px 12px 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      margin-bottom: 5px;
+    }
+
+    .s-sm {
+      width: 64px;
+      height: 24px;
+      background: linear-gradient(150deg, #8a8480, #4a4845);
+      border-radius: 55%;
+      margin-top: -6px;
+    }
+
+    .s-lg {
+      width: 116px;
+      height: 40px;
+      background: linear-gradient(150deg, #7a7470, #3a3835);
+      border-radius: 55%;
+      margin-top: -7px;
+    }
+
+    .still-txt {
+      text-align: center;
+    }
+
+    .still-txt .st {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 24px;
+      color: rgba(255, 255, 255, 0.42);
+      letter-spacing: 0.08em;
+    }
+
+    .still-txt .sk {
+      font-size: 10px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.22);
+      margin-top: 8px;
+    }
+
+    .cup-art-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .cup {
+      width: 64px;
+      height: 58px;
+      background: linear-gradient(135deg, #f6f6f6, #e0e0e0);
+      border-radius: 4px 4px 14px 14px;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cup::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 68%;
+      background: linear-gradient(to bottom, #6b4423, #3d2610);
+      border-radius: 0 0 13px 13px;
+    }
+
+    .cup-saucer {
+      width: 84px;
+      height: 7px;
+      background: linear-gradient(135deg, #e2e2e2, #ccc);
+      border-radius: 50%;
+    }
+
+    /* ── VISIT SECTION ── */
+    .visit-sec {
+      background: var(--off-white);
+      border-top: 1px solid var(--light);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Large decorative kanji watermark */
+    .visit-sec::before {
+      content: '星';
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(260px, 30vw, 420px);
+      font-weight: 700;
+      color: rgba(0, 0, 0, 0.028);
+      position: absolute;
+      top: 50%;
+      right: -40px;
+      transform: translateY(-50%);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+
+    /* Top banner strip */
+    .visit-banner {
+      padding: 32px 80px;
+      border-bottom: 1px solid var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+
+    .visit-banner-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 9px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .visit-banner-eyebrow::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--mid);
+    }
+
+    .visit-banner-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .visit-banner-title em {
+      font-style: italic;
+      color: var(--gray);
+    }
+
+    .visit-banner-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border: 1px solid var(--black);
+      padding: 13px 28px;
+      transition: background .3s, color .3s;
+      flex-shrink: 0;
+    }
+
+    .visit-banner-cta:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .visit-banner-cta::after {
+      content: '→';
+    }
+
+    /* Main grid */
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr 1fr;
+      position: relative;
+      z-index: 2;
+    }
+
+    .visit-col {
+      padding: 64px 56px 72px;
+      border-right: 1px solid var(--light);
+      display: flex;
+      flex-direction: column;
+      min-height: 420px;
+    }
+
+    .visit-col:last-child {
+      border-right: none;
+    }
+
+    /* Column label */
+    .vc-lbl {
+      font-size: 9px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .vc-lbl::before {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: var(--mid);
+      flex-shrink: 0;
+    }
+
+    /* Column title */
+    .vc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 3.5vw, 52px);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 36px;
+      color: var(--black);
+    }
+
+    /* Address */
+    .vc-address {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .vc-address li {
+      font-size: 14px;
+      line-height: 2;
+      color: var(--gray);
+      letter-spacing: 0.01em;
+    }
+
+    .vc-address li.addr-bold {
+      color: var(--black);
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 4px;
+    }
+
+    .vc-map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      margin-top: 8px;
+      padding-bottom: 3px;
+      border-bottom: 1px solid var(--black);
+      transition: gap .3s, border-color .3s;
+      align-self: flex-start;
+    }
+
+    .vc-map-link:hover {
+      gap: 14px;
+    }
+
+    .vc-map-link::after {
+      content: '→';
+    }
+
+    /* Price tag pill */
+    .ptag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 32px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--mid);
+      font-style: italic;
+    }
+
+    .ptag::before {
+      content: '';
+      width: 18px;
+      height: 1px;
+      background: var(--light);
+      flex-shrink: 0;
+    }
+
+    /* Hours list */
+    .hrs-list {
+      list-style: none;
+      flex: 1;
+    }
+
+    .hr {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--light);
+      gap: 16px;
+    }
+
+    .hr:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .hr:last-child {
+      border-bottom: none;
+    }
+
+    .hr-day {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--black);
+      flex-shrink: 0;
+      letter-spacing: 0.01em;
+    }
+
+    .hr-time {
+      font-size: 12.5px;
+      color: var(--gray);
+      text-align: right;
+      letter-spacing: 0.03em;
+    }
+
+    .hr-badge {
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: var(--black);
+      color: var(--white);
+      padding: 2px 7px;
+      border-radius: 2px;
+      margin-left: 6px;
+      vertical-align: middle;
+      position: relative;
+      top: -1px;
+    }
+
+    .hrs-note {
+      margin-top: 24px;
+      font-size: 11.5px;
+      color: var(--mid);
+      line-height: 1.7;
+      font-style: italic;
+      padding-top: 20px;
+      border-top: 1px solid var(--light);
+    }
+
+    /* Contact list */
+    .ct-list {
+      list-style: none;
+      flex: 1;
+    }
+
+    .ct-item {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--light);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .ct-item:first-child {
+      padding-top: 0;
+    }
+
+    .ct-item:last-child {
+      border-bottom: none;
+    }
+
+    .ct-item-label {
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .ct-item a {
+      font-size: 14px;
+      color: var(--black);
+      text-decoration: none;
+      transition: color .3s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      line-height: 1.5;
+    }
+
+    .ct-item a::after {
+      content: '↗';
+      font-size: 11px;
+      color: var(--mid);
+      transition: color .3s, transform .3s;
+      display: inline-block;
+    }
+
+    .ct-item a:hover {
+      color: var(--gray);
+    }
+
+    .ct-item a:hover::after {
+      color: var(--black);
+      transform: translate(2px, -2px);
+    }
+
+    /* Bottom strip */
+    .visit-footer-strip {
+      border-top: 1px solid var(--light);
+      padding: 24px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+
+    .vfs-left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .vfs-dot {
+      width: 6px;
+      height: 6px;
+      background: #4caf50;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+      animation: pulse-green 2.2s ease infinite;
+    }
+
+    @keyframes pulse-green {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+      }
+
+      50% {
+        box-shadow: 0 0 0 7px rgba(76, 175, 80, 0.06);
+      }
+    }
+
+    .vfs-status {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--gray);
+    }
+
+    .vfs-status strong {
+      color: var(--black);
+      font-weight: 400;
+    }
+
+    .vfs-jp {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--mid);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .visit-banner {
+        padding: 28px 24px;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .visit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .visit-col {
+        padding: 48px 24px;
+        border-right: none;
+        border-bottom: 1px solid var(--light);
+        min-height: auto;
+      }
+
+      .visit-col:last-child {
+        border-bottom: none;
+      }
+
+      .visit-footer-strip {
+        padding: 20px 24px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .visit-sec::before {
+        display: none;
+      }
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      padding: 44px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .foot-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .foot-mark {
+      width: 34px;
+      height: 34px;
+      border: 1.5px solid rgba(255, 255, 255, 0.22);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .foot-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.06em;
+    }
+
+    .foot-copy {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.28);
+    }
+
+    .foot-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .foot-links a {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.28);
+      text-decoration: none;
+      transition: color .3s;
+    }
+
+    .foot-links a:hover {
+      color: var(--white);
+    }
+
+
+    /* ── SPACE / GALLERY SECTION ── */
+    .space-sec {
+      background: var(--off-white);
+    }
+
+    .space-top {
+      padding: 80px 80px 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .space-eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .space-eyebrow::before {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: var(--mid);
+    }
+
+    .space-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(44px, 6vw, 72px);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .space-title em {
+      font-style: italic;
+      color: var(--gray);
+    }
+
+    .space-top-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 4px;
+    }
+
+    .space-desc {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--gray);
+      max-width: 400px;
+      margin-bottom: 20px;
+    }
+
+    .space-ig {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--light);
+      padding-bottom: 4px;
+      transition: border-color .3s;
+    }
+
+    .space-ig:hover {
+      border-color: var(--black);
+    }
+
+    /* ── 6-IMAGE EDITORIAL GRID ── */
+    .space-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      grid-template-rows: 420px 360px;
+      gap: 3px;
+    }
+
+    /* Image 1 — large hero, spans 2 rows on left */
+    .space-item:nth-child(1) {
+      grid-column: 1;
+      grid-row: 1 / 3;
+    }
+
+    /* Image 2 — top centre */
+    .space-item:nth-child(2) {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    /* Image 3 — top right */
+    .space-item:nth-child(3) {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    /* Image 4 — bottom centre */
+    .space-item:nth-child(4) {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    /* Image 5 — bottom right */
+    .space-item:nth-child(5) {
+      grid-column: 3;
+      grid-row: 2;
+    }
+
+    /* Image 6 — wide strip below, full width */
+    .space-item:nth-child(6) {
+      grid-column: 1 / 4;
+      grid-row: 3;
+      height: 220px;
+    }
+
+    /* Expand grid to 3 rows to hold the strip */
+    .space-grid {
+      grid-template-rows: 420px 360px 220px;
+    }
+
+    .space-item {
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+      min-height: 0;
+    }
+
+    .space-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .8s cubic-bezier(.23, 1, .32, 1), filter .8s;
+      filter: brightness(0.88) saturate(0.9);
+    }
+
+    .space-item:hover img {
+      transform: scale(1.05);
+      filter: brightness(0.75) saturate(0.85);
+    }
+
+    .space-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 28px 22px 18px;
+      background: linear-gradient(transparent, rgba(10, 10, 10, 0.75));
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      transform: translateY(6px);
+      opacity: 0;
+      transition: transform .45s cubic-bezier(.23, 1, .32, 1), opacity .45s;
+    }
+
+    .space-item:hover .space-caption {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .cap-tag {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .cap-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    @media (max-width: 900px) {
+      .space-top {
+        grid-template-columns: 1fr;
+        padding: 60px 28px 40px;
+        gap: 24px;
+      }
+
+      .space-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+
+      .space-item:nth-child(1) {
+        grid-column: 1 / 3;
+        grid-row: auto;
+        height: 280px;
+      }
+
+      .space-item:nth-child(2),
+      .space-item:nth-child(3),
+      .space-item:nth-child(4),
+      .space-item:nth-child(5) {
+        grid-column: auto;
+        grid-row: auto;
+        height: 200px;
+      }
+
+      .space-item:nth-child(6) {
+        grid-column: 1 / 3;
+        grid-row: auto;
+        height: 180px;
+      }
+    }
+
+    /* ANIMS */
+    @keyframes fu {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fi {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes mq {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes sdrop {
+      0% {
+        transform: translateY(-100%);
+      }
+
+      100% {
+        transform: translateY(100%);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .9s cubic-bezier(.23, 1, .32, 1), transform .9s cubic-bezier(.23, 1, .32, 1);
+    }
+
+    .reveal.on {
+      opacity: 1;
+      transform: none;
+    }
+
+    .rd1 {
+      transition-delay: .1s;
+    }
+
+    .rd2 {
+      transition-delay: .2s;
+    }
+
+    .rd3 {
+      transition-delay: .3s;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-left {
+        padding: 120px 28px 80px;
+      }
+
+      .hero-right {
+        min-height: 360px;
+      }
+
+      .hr-scroll {
+        display: none;
+      }
+
+      .brand-stmt {
+        grid-template-columns: 1fr;
+        padding: 70px 28px;
+        gap: 28px;
+      }
+
+      .bs-num {
+        display: none;
+      }
+
+      .menu-sec {
+        padding: 70px 28px;
+      }
+
+      .menu-panel.active {
+        grid-template-columns: 1fr;
+      }
+
+      .still-sec {
+        grid-template-columns: 1fr;
+        padding: 80px 28px;
+      }
+
+      .gal-hd {
+        padding: 30px 28px 22px;
+      }
+
+      .gal-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+
+      .gitem:first-child {
+        grid-row: span 1;
+        grid-column: span 2;
+        min-height: 280px;
+      }
+
+      .gitem {
+        min-height: 180px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        padding: 36px 28px;
+      }
+
+      .sec-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+
+    /* SPACE / GALLERY */
+    .space-sec {
+      background: var(--off-white);
+      padding-bottom: 0;
+    }
+
+    .space-hd {
+      padding: 80px 80px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 60px;
+      align-items: end;
+      border-bottom: 1px solid var(--light);
+    }
+
+    .space-eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .space-eyebrow::before {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: var(--mid);
+    }
+
+    .space-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .space-title em {
+      font-style: italic;
+      color: var(--gray);
+    }
+
+    .space-desc {
+      font-size: 14px;
+      line-height: 1.95;
+      color: var(--gray);
+      align-self: end;
+      padding-bottom: 4px;
+    }
+
+    .space-grid {
+      display: grid;
+      grid-template-columns: 1.65fr 1fr;
+      grid-template-rows: 420px 320px;
+      gap: 3px;
+      background: var(--light);
+    }
+
+    .sitem {
+      position: relative;
+      overflow: hidden;
+      background: var(--cream);
+    }
+
+    .sitem-large {
+      grid-row: span 2;
+    }
+
+
+    .sitem-inner {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .sitem-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .7s cubic-bezier(.23, 1, .32, 1), filter .5s;
+      filter: brightness(0.97);
+    }
+
+    .sitem:hover .sitem-inner img {
+      transform: scale(1.04);
+      filter: brightness(1);
+    }
+
+    .sitem-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 36px 28px 24px;
+      background: linear-gradient(transparent, rgba(10, 10, 10, 0.62));
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .4s, transform .4s;
+    }
+
+    .sitem:hover .sitem-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scap-tag {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .scap-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.92);
+      letter-spacing: 0.02em;
+    }
+
+    .space-footer {
+      padding: 28px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--light);
+      background: var(--off-white);
+    }
+
+    .sf-ig {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--gray);
+    }
+
+    .sf-link {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap .3s;
+    }
+
+    .sf-link:hover {
+      gap: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .space-hd {
+        grid-template-columns: 1fr;
+        padding: 60px 28px 40px;
+        gap: 20px;
+      }
+
+      .space-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 280px 220px 220px;
+      }
+
+      .sitem-large {
+        grid-row: span 1;
+      }
+
+      .space-footer {
+        padding: 22px 28px;
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="cur" id="CUR">
+    <div class="cur-ring" id="CR"></div>
+    <div class="cur-dot" id="CD"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="NAV">
+    <a href="#" class="nav-logo">
+      <div class="logo-mark"><span>星</span></div>
+      <div class="logo-text">
+        <span class="logo-en">Hoshi</span>
+        <span class="logo-sub">Speciality Coffee · Madhapur</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="h-eyebrow">星 Hoshi · Speciality Coffee Shop</p>
+      <h1 class="h-title">Hoshi</h1>
+      <div class="h-kanji">星</div>
+      <p class="h-tagline">Stillness.</p>
+      <p class="h-jp">静けさ。— Madhapur, Hyderabad</p>
+      <div class="h-cta">
+        <a href="#menu" class="btn-blk">Our Menu</a>
+        <a href="#visit" class="btn-txt">Find Us</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hr-bg"></div>
+
+      <img src="images/image1.webp" alt="Hoshi Cafe" class="hr-img">
+      <div class="hr-vignette"></div>
+      <div class="hr-art">
+        <div class="drink-coupe"></div>
+        <div class="coupe-stem"></div>
+        <div class="coupe-base"></div>
+        <div class="stone-sm"></div>
+        <div class="stone-lg"></div>
+      </div>
+      <div class="hr-stamp">
+        <div class="hr-stamp-k">星</div>
+        <div class="hr-stamp-e">Hoshi</div>
+      </div>
+      <div class="hr-ig">@hoshi.hyd</div>
+      <div class="hr-scroll">
+        <div class="scroll-bar"></div>
+        <span class="scroll-lbl">Scroll</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="mq-track">
+      <span class="mqi">星 Hoshi <span class="sep">◦</span></span>
+      <span class="mqi">Speciality Coffee Shop <span class="sep">◦</span></span>
+      <span class="mqi">静けさ。Stillness <span class="sep">◦</span></span>
+      <span class="mqi">Madhapur · Hyderabad <span class="sep">◦</span></span>
+      <span class="mqi">The Calmness of Japan <span class="sep">◦</span></span>
+      <span class="mqi">The Warmth of Hyderabad <span class="sep">◦</span></span>
+      <span class="mqi">Clean Lines · Quiet Music <span class="sep">◦</span></span>
+      <span class="mqi">@hoshi.hyd <span class="sep">◦</span></span>
+      <span class="mqi">星 Hoshi <span class="sep">◦</span></span>
+      <span class="mqi">Speciality Coffee Shop <span class="sep">◦</span></span>
+      <span class="mqi">静けさ。Stillness <span class="sep">◦</span></span>
+      <span class="mqi">Madhapur · Hyderabad <span class="sep">◦</span></span>
+      <span class="mqi">The Calmness of Japan <span class="sep">◦</span></span>
+      <span class="mqi">The Warmth of Hyderabad <span class="sep">◦</span></span>
+      <span class="mqi">Clean Lines · Quiet Music <span class="sep">◦</span></span>
+      <span class="mqi">@hoshi.hyd <span class="sep">◦</span></span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="brand-stmt" id="about">
+    <div class="bs-l reveal">
+      <div class="bs-num">01</div>
+      <p class="bs-lbl">About Hoshi</p>
+    </div>
+    <div class="bs-r reveal rd1">
+      <h2 class="bs-quote">The calmness of Japan, and the <em>rich, generous hospitality</em> of Hyderabad.</h2>
+      <p class="bs-body">The result is a cafe that's both meticulous and warm — clean lines, quiet music and food that
+        respects local flavors.<br><br>HOSHI (星) means "star" in Japanese. We are a speciality coffee shop in the heart
+        of Madhapur, built for those who believe a great cup of coffee deserves unhurried attention.</p>
+      <a href="https://www.instagram.com/hoshi.hyd" target="_blank" rel="noopener" class="bs-link">Follow @hoshi.hyd on
+        Instagram →</a>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu-sec" id="menu">
+    <div class="sec-head reveal">
+      <h2 class="sec-title">Our <em>Menu</em></h2>
+      <div class="sec-kanji">星</div>
+    </div>
+    <div class="menu-tabs" role="tablist">
+      <button class="tab active" onclick="switchTab(this,'hot')">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 8h1a4 4 0 0 1 0 8h-1" />
+          <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+          <line x1="6" y1="2" x2="6" y2="4" />
+          <line x1="10" y1="2" x2="10" y2="4" />
+          <line x1="14" y1="2" x2="14" y2="4" />
+        </svg>
+        Classics
+      </button>
+      <button class="tab" onclick="switchTab(this,'cold')">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a5 5 0 0 1 5 5c0 1.8-.9 3.4-2.3 4.3L12 22 9.3 11.3A5 5 0 0 1 12 2z" />
+          <circle cx="12" cy="7" r="2" />
+        </svg>
+        Affogatos
+      </button>
+      <button class="tab" onclick="switchTab(this,'sigs')">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <polygon
+            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+        Signatures
+      </button>
+      <button class="tab" onclick="switchTab(this,'exp')">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 3h6" />
+          <path d="M10 3v6l-4 9a1 1 0 0 0 .9 1.45h10.2A1 1 0 0 0 18 18l-4-9V3" />
+          <line x1="6.5" y1="15" x2="17.5" y2="15" />
+        </svg>
+        Experimental
+      </button>
+      <button class="tab" onclick="switchTab(this,'tea')">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z" />
+          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+        </svg>
+        Hot/Iced Tea
+      </button>
+    </div>
+
+    <div class="menu-panel active" id="tab-hot">
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Espresso / Doppio</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Pure, bold, and unapologetic.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Americano (Hot/Iced)</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Espresso with hot water. Simple perfection.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Cappuccino (Hot)</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Equal parts espresso, steamed milk, and velvety foam.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Latte (Hot/Iced)</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Smooth espresso with steamed milk. Your daily comfort.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Cortado (Hot)</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Balanced espresso and milk in perfect harmony.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Flat White (Hot)</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Velvety microfoam with double shots. Melbourne style.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Mocha (Hot/Iced)</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Espresso, steamed milk, and rich chocolate. Blissful.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Spanish Latte (Hot/Iced)</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Espresso with sweetened condensed milk. Indulgent and smooth.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Matcha Latte</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Whisked matcha with steamed milk. Earthy and energizing.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Hot Chocolate</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Rich, creamy, pure indulgence.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Cold Brew</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Smooth, refreshing, made fresh daily.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+    </div>
+    <div class="menu-panel" id="tab-cold">
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Pistachio</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Creamy pistachio gelato drowned in hot espresso.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Vanilla</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Classic vanilla gelato with a shot of bold espresso.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Matcha</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Earthy matcha gelato with espresso pour. Unique fusion.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+    </div>
+    <div class="menu-panel" id="tab-sigs">
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Sunrise Espresso</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Our signature blend. Golden, bright, and energizing.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Grapefruit Espresso</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Citrus notes with bold espresso. Refreshingly bold.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Cranberry Espresso</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Tart and fruity. A unique coffee experience.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Strawberry Cold Brew</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Smooth cold brew with strawberry sweetness.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Kokum Cold Brew</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Tangy, tropical cold brew. A taste of India.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Cherry Cold Brew</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Dark cherry notes with smooth cold brew.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Lemonade Cold Brew</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Zesty lemon with chilled espresso. Perfect for summer.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Sunset Matcha</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Whisked matcha with vanilla. Smooth and earthy.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Seasonal Matcha</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Rotating seasonal flavors. Ask for today's special.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+    </div>
+    <div class="menu-panel" id="tab-exp">
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Miso Iced Latte</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Umami espresso with miso creaminess. Avant-garde.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Vietnamese Latte With Salted</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Condensed milk with espresso and sea salt. Bold balance.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Milk Foam</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Silky microfoam with seasonal syrups. Cloud-like.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Miro Matcha</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Artistic matcha blend. Instagram-worthy and delicious.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Banana Matcha</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Creamy banana with earthy matcha. Smooth fusion.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Pineapple Matcha</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Tropical pineapple with green tea notes. Unexpected.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Black Sesame Matcha</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Nutty black sesame with matcha richness. Complex.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+    </div>
+    <div class="menu-panel" id="tab-tea">
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Green Tea</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Fresh, delicate, and calming.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Apple Cinnamon</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Warm spiced apple tea. Cozy comfort.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Hibiscus</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Tart, floral, and refreshing.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Mint Chamomile</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Soothing blend for any time of day.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Lavender</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Floral and calming. Pure serenity.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Peach Tea</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Sweet and fruity peach blend.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top">
+          <div class="veg"></div><span class="mcard-name">Lemon Tea</span>
+        </div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Zesty and bright. Perfectly balanced.</p>
+        <span class="mcard-kanji">星</span>
+      </div>
+    </div>
+    <p class="menu-note reveal">* Menu subject to seasonal change. Please inform our team of any allergies.</p>
+  </section>
+
+  <!-- STILLNESS / EXPERIENCE -->
+  <section class="still-sec" id="experience">
+    <div class="still-bg">星</div>
+    <div class="reveal">
+      <p class="still-eyebrow">The Philosophy</p>
+      <h2 class="still-title">静けさ。<br>Stillness.</h2>
+      <p class="still-jp">shizukesa — the quality of calm</p>
+      <p class="still-body">In a city that never stops, HOSHI offers a reason to pause. The coffee counter sits at the
+        centre — watch each pour, each bloom, each extraction. Stay as long as you like.</p>
+    </div>
+    <div class="feat-list reveal rd2">
+      <div class="feat">
+        <div class="feat-n">01</div>
+        <div class="feat-info">
+          <div class="feat-title">Speciality Coffee</div>
+          <div class="feat-desc">Single origin beans, ethically sourced. Every cup a new discovery.</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-n">02</div>
+        <div class="feat-info">
+          <div class="feat-title">Japanese Aesthetics</div>
+          <div class="feat-desc">Clean lines, considered details, a space designed for lingering conversations.</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-n">03</div>
+        <div class="feat-info">
+          <div class="feat-title">Hyderabadi Warmth</div>
+          <div class="feat-desc">Generous hospitality. Food that respects local flavors and stories.</div>
+        </div>
+      </div>
+      <div class="feat">
+        <div class="feat-n">04</div>
+        <div class="feat-info">
+          <div class="feat-title">Indoor &amp; Outdoor Seating</div>
+          <div class="feat-desc">Dine-in, takeaway, and digital payments all welcome.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="space-sec">
+    <div class="space-top reveal">
+      <div class="space-top-left">
+        <p class="space-eyebrow">星 Hoshi · Madhapur</p>
+        <h2 class="space-title">From Our<br><em>Space</em></h2>
+      </div>
+      <div class="space-top-right">
+        <a href="images/image1.webp" target="_blank" rel="noopener" class="space-ig">@hoshi.hyd →</a>
+      </div>
+    </div>
+
+    <div class="space-grid">
+
+      <!-- 1. ENTRANCE -->
+      <div class="space-item">
+        <img src="images/image4.webp" alt="Hoshi Cafe pathway entrance" loading="lazy" decoding="async"
+          class="gallery-img">
+        <div class="space-caption">
+          <span class="cap-tag">The Entrance</span>
+          <span class="cap-text">星 Hoshi · Madhapur</span>
+        </div>
+      </div>
+
+      <!-- 2. COFFEE COUNTER -->
+      <div class="space-item">
+        <img src="images/image8.webp" alt="Hoshi Cafe entrance at night" loading="lazy" decoding="async"
+          class="gallery-img">
+        <div class="space-caption">
+          <span class="cap-tag">Coffee Counter</span>
+          <span class="cap-text">Where every cup begins</span>
+        </div>
+      </div>
+
+      <!-- 3. DINING ROOM -->
+      <div class="space-item">
+        <img src="images/image7.webp" alt="Hoshi Cafe dining area" loading="lazy" decoding="async" class="gallery-img">
+        <div class="space-caption">
+          <span class="cap-tag">Dining Room</span>
+          <span class="cap-text">Comfort meets calm</span>
+        </div>
+      </div>
+
+      <!-- 4. THE BAR -->
+      <div class="space-item">
+        <img src="images/image6.webp" alt="Hoshi Cafe bar area" loading="lazy" decoding="async" class="gallery-img">
+        <div class="space-caption">
+          <span class="cap-tag">The Bar</span>
+          <span class="cap-text">Coffee at the centre</span>
+        </div>
+      </div>
+
+      <!-- 5. THE TERRACE -->
+      <div class="space-item">
+        <img src="images/image3.webp" alt="Hoshi Cafe terrace seating" loading="lazy" decoding="async"
+          class="gallery-img">
+        <div class="space-caption">
+          <span class="cap-tag">The Terrace</span>
+          <span class="cap-text">Open skies · unwind</span>
+        </div>
+      </div>
+
+      <!-- 6. SEATING -->
+      <div class="space-item">
+        <img src="images/image5.webp" alt="Hoshi Cafe seating area" loading="lazy" decoding="async" class="gallery-img">
+        <div class="space-caption">
+          <span class="cap-tag">Seating</span>
+          <span class="cap-text">Warm tones · slow moments</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="visit-sec" id="visit">
+
+    <!-- Top banner -->
+    <div class="visit-banner reveal">
+      <span class="visit-banner-eyebrow">Plan Your Visit</span>
+      <h2 class="visit-banner-title">Come &amp; <em>Stay Awhile</em></h2>
+      <a href="https://maps.app.goo.gl/TZ9jqHxDcumjr7Ee9" target="_blank" rel="noopener" class="visit-banner-cta">Get
+        Directions</a>
+    </div>
+
+    <!-- Three columns -->
+    <div class="visit-grid">
+
+      <!-- Col 1 — Hours (moved to first) -->
+      <div class="visit-col reveal">
+        <p class="vc-lbl">Hours</p>
+        <h3 class="vc-title">Open<br>Daily</h3>
+        <ul class="hrs-list">
+          <li class="hr">
+            <span class="hr-day">Mon – Thu</span>
+            <span class="hr-time">11 AM – 11 PM</span>
+          </li>
+          <li class="hr">
+            <span class="hr-day">Friday</span>
+            <span class="hr-time">11 AM – Midnight <span class="hr-badge">Late</span></span>
+          </li>
+          <li class="hr">
+            <span class="hr-day">Saturday</span>
+            <span class="hr-time">10 AM – Midnight <span class="hr-badge">Late</span></span>
+          </li>
+          <li class="hr">
+            <span class="hr-day">Sunday</span>
+            <span class="hr-time">10 AM – 10 PM</span>
+          </li>
+        </ul>
+        <p class="hrs-note">Last order 30 minutes before closing. Kitchen hours may vary on holidays.</p>
+      </div>
+
+      <!-- Col 2 — Location -->
+      <div class="visit-col reveal rd1">
+        <p class="vc-lbl">Find Us</p>
+        <h3 class="vc-title">Visit<br>Hoshi</h3>
+        <ul class="vc-address">
+          <li class="addr-bold">Madhapur</li>
+          <li>Survey 3P, Circle 20</li>
+          <li>Hyderabad — 500 081</li>
+          <li>Telangana, India</li>
+        </ul>
+        <a href="https://maps.app.goo.gl/TZ9jqHxDcumjr7Ee9" target="_blank" rel="noopener" class="vc-map-link">Open in
+          Google Maps</a>
+        <p class="ptag">700 for two, approx.</p>
+      </div>
+
+      <!-- Col 3 — Contact -->
+      <div class="visit-col reveal rd2">
+        <p class="vc-lbl">Contact</p>
+        <h3 class="vc-title">Get In<br>Touch</h3>
+        <ul class="ct-list">
+          <li class="ct-item">
+            <span class="ct-item-label">Phone</span>
+            <a href="tel:+919542202202">+91 95422 02202</a>
+          </li>
+          <li class="ct-item">
+            <span class="ct-item-label">Instagram</span>
+            <a href="https://www.instagram.com/hoshi.hyd" target="_blank" rel="noopener">@hoshi.hyd</a>
+          </li>
+          <li class="ct-item">
+            <span class="ct-item-label">Directions</span>
+            <a href="https://maps.app.goo.gl/TZ9jqHxDcumjr7Ee9" target="_blank" rel="noopener">Google Maps</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom strip -->
+    <div class="visit-footer-strip reveal">
+      <div class="vfs-left">
+        <div class="vfs-dot"></div>
+        <span class="vfs-status"><strong>Open Today</strong> — until 11 PM</span>
+      </div>
+      <span class="vfs-jp">静けさ。— Stillness · Madhapur</span>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot-logo">
+      <div class="foot-mark">星</div>
+      <span class="foot-en">Hoshi</span>
+    </div>
+    <span class="foot-copy">© 2026 星 Hoshi · Speciality Coffee · Madhapur, Hyderabad</span>
+    <ul class="foot-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#visit">Visit</a></li>
+      <li><a href="https://www.instagram.com/hoshi.hyd" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    // Cursor
+    const cd = document.getElementById('CD'), cr = document.getElementById('CR');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cd.style.left = mx + 'px'; cd.style.top = my + 'px'; });
+    (function loop() { rx += (mx - rx) * .11; ry += (my - ry) * .11; cr.style.left = rx + 'px'; cr.style.top = ry + 'px'; requestAnimationFrame(loop); })();
+
+    // Nav scroll
+    const nav = document.getElementById('NAV');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60));
+
+    // Reveal
+    const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }), { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Menu tabs
+    function switchTab(btn, id) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + id).classList.add('active');
+    }
+  </script>
+</body>
+
+</html>
