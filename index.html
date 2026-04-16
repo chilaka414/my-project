@@ -686,34 +686,63 @@
 
     .menu-panel.active {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-    }
-
-    .mrow {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 18px 22px;
-      background: var(--white);
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      transition: background .3s;
     }
 
-    .mrow:hover {
-      background: var(--cream);
-    }
-
-    .mrow-info {
+    /* CARD */
+    .mcard {
+      background: var(--white);
+      border: 1px solid var(--light);
+      border-radius: 2px;
+      padding: 28px 24px 24px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .35s, transform .35s cubic-bezier(.23,1,.32,1), box-shadow .35s;
+      cursor: default;
     }
 
-    .mrow-top {
+    .mcard::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--black);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s cubic-bezier(.23,1,.32,1);
+    }
+
+    .mcard:hover {
+      border-color: var(--mid);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.07);
+    }
+
+    .mcard:hover::before {
+      transform: scaleX(1);
+    }
+
+    /* card accent kanji watermark */
+    .mcard-kanji {
+      position: absolute;
+      bottom: -8px; right: 10px;
+      font-family: 'Shippori Mincho', serif;
+      font-size: 56px;
+      font-weight: 700;
+      color: rgba(0,0,0,0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .mcard-top {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
     }
 
     .veg {
@@ -735,26 +764,34 @@
       border-radius: 50%;
     }
 
-    .mrow-name {
+    .mcard-name {
       font-size: 14px;
-      color: var(--black);
-      font-weight: 400;
-    }
-
-    .mrow-desc {
-      font-size: 11.5px;
-      color: var(--gray);
-      font-style: italic;
-      padding-left: 18px;
-    }
-
-    .mrow-price {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 21px;
       font-weight: 400;
       color: var(--black);
-      white-space: nowrap;
+      letter-spacing: 0.01em;
+      line-height: 1.3;
+    }
+
+    .mcard-divider {
+      width: 24px;
+      height: 1px;
+      background: var(--light);
       flex-shrink: 0;
+    }
+
+    .mcard-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--gray);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    @media (max-width: 1100px) {
+      .menu-panel.active {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .menu-note {
@@ -2286,272 +2323,235 @@
     </div>
 
     <div class="menu-panel active" id="tab-hot">
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Espresso / Doppio</span>
-          </div><span class="mrow-desc">Pure, bold, and unapologetic.</span>
-        </div><span class="mrow-price">₹175 / ₹265</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Espresso / Doppio</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Pure, bold, and unapologetic.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Americano (Hot/Iced)</span>
-          </div><span class="mrow-desc">Espresso with hot water. Simple perfection.</span>
-        </div><span class="mrow-price">₹195</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Americano (Hot/Iced)</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Espresso with hot water. Simple perfection.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Cappuccino (Hot)</span>
-          </div><span class="mrow-desc">Equal parts espresso, steamed milk, and velvety foam.</span>
-        </div><span class="mrow-price">₹245</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Cappuccino (Hot)</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Equal parts espresso, steamed milk, and velvety foam.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Latte (Hot/Iced)</span>
-          </div><span class="mrow-desc">Smooth espresso with steamed milk. Your daily comfort.</span>
-        </div><span class="mrow-price">₹255</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Latte (Hot/Iced)</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Smooth espresso with steamed milk. Your daily comfort.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Cortado (Hot)</span>
-          </div><span class="mrow-desc">Balanced espresso and milk in perfect harmony.</span>
-        </div><span class="mrow-price">₹225</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Cortado (Hot)</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Balanced espresso and milk in perfect harmony.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Flat White (Hot)</span>
-          </div><span class="mrow-desc">Velvety microfoam with double shots. Melbourne style.</span>
-        </div><span class="mrow-price">₹225</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Flat White (Hot)</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Velvety microfoam with double shots. Melbourne style.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Mocha (Hot/Iced)</span>
-          </div><span class="mrow-desc">Espresso, steamed milk, and rich chocolate. Blissful.</span>
-        </div><span class="mrow-price">₹285</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Mocha (Hot/Iced)</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Espresso, steamed milk, and rich chocolate. Blissful.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Spanish Latte (Hot/Iced)</span>
-          </div><span class="mrow-desc">Espresso with sweetened condensed milk. Indulgent and smooth.</span>
-        </div><span class="mrow-price">₹325 / ₹340</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Spanish Latte (Hot/Iced)</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Espresso with sweetened condensed milk. Indulgent and smooth.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Matcha Latte</span>
-          </div><span class="mrow-desc">Whisked matcha with steamed milk. Earthy and energizing.</span>
-        </div><span class="mrow-price">₹325</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Matcha Latte</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Whisked matcha with steamed milk. Earthy and energizing.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Hot Chocolate</span>
-          </div><span class="mrow-desc">Rich, creamy, pure indulgence.</span>
-        </div><span class="mrow-price">₹355</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Hot Chocolate</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Rich, creamy, pure indulgence.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Cold Brew</span>
-          </div><span class="mrow-desc">Smooth, refreshing, made fresh daily.</span>
-        </div><span class="mrow-price">₹255</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Cold Brew</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Smooth, refreshing, made fresh daily.</p>
+        <span class="mcard-kanji">星</span>
       </div>
     </div>
     <div class="menu-panel" id="tab-cold">
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Pistachio</span>
-          </div><span class="mrow-desc">Creamy pistachio gelato drowned in hot espresso.</span>
-        </div><span class="mrow-price">₹315</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Pistachio</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Creamy pistachio gelato drowned in hot espresso.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Vanilla</span>
-          </div><span class="mrow-desc">Classic vanilla gelato with a shot of bold espresso.</span>
-        </div><span class="mrow-price">₹295</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Vanilla</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Classic vanilla gelato with a shot of bold espresso.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Matcha</span>
-          </div><span class="mrow-desc">Earthy matcha gelato with espresso pour. Unique fusion.</span>
-        </div><span class="mrow-price">₹325</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Matcha</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Earthy matcha gelato with espresso pour. Unique fusion.</p>
+        <span class="mcard-kanji">星</span>
       </div>
     </div>
     <div class="menu-panel" id="tab-sigs">
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Sunrise Espresso</span>
-          </div><span class="mrow-desc">Our signature blend. Golden, bright, and energizing.</span>
-        </div><span class="mrow-price">₹315</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Sunrise Espresso</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Our signature blend. Golden, bright, and energizing.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Grapefruit Espresso</span>
-          </div><span class="mrow-desc">Citrus notes with bold espresso. Refreshingly bold.</span>
-        </div><span class="mrow-price">₹315</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Grapefruit Espresso</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Citrus notes with bold espresso. Refreshingly bold.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Cranberry Espresso</span>
-          </div><span class="mrow-desc">Tart and fruity. A unique coffee experience.</span>
-        </div><span class="mrow-price">₹315</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Cranberry Espresso</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Tart and fruity. A unique coffee experience.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Strawberry Cold Brew</span>
-          </div><span class="mrow-desc">Smooth cold brew with strawberry sweetness.</span>
-        </div><span class="mrow-price">₹315</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Strawberry Cold Brew</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Smooth cold brew with strawberry sweetness.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Kokum Cold Brew</span>
-          </div><span class="mrow-desc">Tangy, tropical cold brew. A taste of India.</span>
-        </div><span class="mrow-price">₹315</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Kokum Cold Brew</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Tangy, tropical cold brew. A taste of India.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Cherry Cold Brew</span>
-          </div><span class="mrow-desc">Dark cherry notes with smooth cold brew.</span>
-        </div><span class="mrow-price">₹315</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Cherry Cold Brew</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Dark cherry notes with smooth cold brew.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Lemonade Cold Brew</span>
-          </div><span class="mrow-desc">Zesty lemon with chilled espresso. Perfect for summer.</span>
-        </div><span class="mrow-price">₹315</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Lemonade Cold Brew</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Zesty lemon with chilled espresso. Perfect for summer.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Sunset Matcha</span>
-          </div><span class="mrow-desc">Whisked matcha with vanilla. Smooth and earthy.</span>
-        </div><span class="mrow-price">₹325</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Sunset Matcha</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Whisked matcha with vanilla. Smooth and earthy.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Seasonal Matcha</span>
-          </div><span class="mrow-desc">Rotating seasonal flavors. Ask for today's special.</span>
-        </div><span class="mrow-price">₹325</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Seasonal Matcha</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Rotating seasonal flavors. Ask for today's special.</p>
+        <span class="mcard-kanji">星</span>
       </div>
     </div>
     <div class="menu-panel" id="tab-exp">
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Miso Iced Latte</span>
-          </div><span class="mrow-desc">Umami espresso with miso creaminess. Avant-garde.</span>
-        </div><span class="mrow-price">₹345</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Miso Iced Latte</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Umami espresso with miso creaminess. Avant-garde.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Vietnamese Latte With Salted</span>
-          </div><span class="mrow-desc">Condensed milk with espresso and sea salt. Bold balance.</span>
-        </div><span class="mrow-price">₹340</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Vietnamese Latte With Salted</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Condensed milk with espresso and sea salt. Bold balance.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Milk Foam</span>
-          </div><span class="mrow-desc">Silky microfoam with seasonal syrups. Cloud-like.</span>
-        </div><span class="mrow-price">₹325</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Milk Foam</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Silky microfoam with seasonal syrups. Cloud-like.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Miro Matcha</span>
-          </div><span class="mrow-desc">Artistic matcha blend. Instagram-worthy and delicious.</span>
-        </div><span class="mrow-price">₹345</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Miro Matcha</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Artistic matcha blend. Instagram-worthy and delicious.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Banana Matcha</span>
-          </div><span class="mrow-desc">Creamy banana with earthy matcha. Smooth fusion.</span>
-        </div><span class="mrow-price">₹325</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Banana Matcha</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Creamy banana with earthy matcha. Smooth fusion.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Pineapple Matcha</span>
-          </div><span class="mrow-desc">Tropical pineapple with green tea notes. Unexpected.</span>
-        </div><span class="mrow-price">₹325</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Pineapple Matcha</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Tropical pineapple with green tea notes. Unexpected.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Black Sesame Matcha</span>
-          </div><span class="mrow-desc">Nutty black sesame with matcha richness. Complex.</span>
-        </div><span class="mrow-price">₹335</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Black Sesame Matcha</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Nutty black sesame with matcha richness. Complex.</p>
+        <span class="mcard-kanji">星</span>
       </div>
     </div>
     <div class="menu-panel" id="tab-tea">
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Green Tea</span>
-          </div><span class="mrow-desc">Fresh, delicate, and calming.</span>
-        </div><span class="mrow-price">₹225</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Green Tea</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Fresh, delicate, and calming.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Apple Cinnamon</span>
-          </div><span class="mrow-desc">Warm spiced apple tea. Cozy comfort.</span>
-        </div><span class="mrow-price">₹225</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Apple Cinnamon</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Warm spiced apple tea. Cozy comfort.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Hibiscus</span>
-          </div><span class="mrow-desc">Tart, floral, and refreshing.</span>
-        </div><span class="mrow-price">₹225</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Hibiscus</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Tart, floral, and refreshing.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Mint Chamomile</span>
-          </div><span class="mrow-desc">Soothing blend for any time of day.</span>
-        </div><span class="mrow-price">₹225</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Mint Chamomile</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Soothing blend for any time of day.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Lavender</span>
-          </div><span class="mrow-desc">Floral and calming. Pure serenity.</span>
-        </div><span class="mrow-price">₹225</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Lavender</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Floral and calming. Pure serenity.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Peach Tea</span>
-          </div><span class="mrow-desc">Sweet and fruity peach blend.</span>
-        </div><span class="mrow-price">₹225</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Peach Tea</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Sweet and fruity peach blend.</p>
+        <span class="mcard-kanji">星</span>
       </div>
-      <div class="mrow">
-        <div class="mrow-info">
-          <div class="mrow-top">
-            <div class="veg"></div><span class="mrow-name">Lemon Tea</span>
-          </div><span class="mrow-desc">Zesty and bright. Perfectly balanced.</span>
-        </div><span class="mrow-price">₹225</span>
+      <div class="mcard">
+        <div class="mcard-top"><div class="veg"></div><span class="mcard-name">Lemon Tea</span></div>
+        <div class="mcard-divider"></div>
+        <p class="mcard-desc">Zesty and bright. Perfectly balanced.</p>
+        <span class="mcard-kanji">星</span>
       </div>
     </div>
     <p class="menu-note reveal">* Menu subject to seasonal change. Please inform our team of any allergies.</p>
