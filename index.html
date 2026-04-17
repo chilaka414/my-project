@@ -192,6 +192,7 @@
       width: 100%;
     }
 
+
     @media (max-width: 800px) {
       nav {
         padding: 22px 24px;
@@ -216,6 +217,8 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
+      text-align: center;
       padding: 160px 80px 100px;
       position: relative;
       z-index: 2;
@@ -235,10 +238,7 @@
     }
 
     .h-eyebrow::before {
-      content: '';
-      width: 30px;
-      height: 1px;
-      background: var(--mid);
+      display: none;
     }
 
     .h-title {
@@ -287,6 +287,7 @@
       display: flex;
       gap: 24px;
       align-items: center;
+      justify-content: center;
       opacity: 0;
       animation: fu 1s .8s forwards;
     }
@@ -1470,6 +1471,44 @@
       transform: translate(2px, -2px);
     }
 
+    .ct-social-item .ct-social-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .ct-social-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--black);
+      text-decoration: none;
+      transition: color .3s;
+    }
+
+    .ct-social-link svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      color: var(--gray);
+      transition: color .3s;
+    }
+
+    .ct-social-link:hover {
+      color: var(--gray);
+    }
+
+    .ct-social-link:hover svg {
+      color: var(--black);
+    }
+
+    /* override the generic ct-item a::after arrow for social links */
+    .ct-social-link::after {
+      display: none !important;
+    }
+
     /* Bottom strip */
     .visit-footer-strip {
       border-top: 1px solid var(--light);
@@ -2192,6 +2231,7 @@
     </ul>
   </nav>
 
+
   <!-- HERO -->
   <section class="hero">
     <div class="hero-left">
@@ -2260,9 +2300,11 @@
     <div class="bs-r reveal rd1">
       <h2 class="bs-quote">The calmness of Japan, and the <em>rich, generous hospitality</em> of Hyderabad.</h2>
       <p class="bs-body">The result is a cafe that's both meticulous and warm — clean lines, quiet music and food that
-        respects local flavors.<br><br>HOSHI (星) means "star" in Japanese. We are a speciality coffee shop in the heart
+        respects local flavors.<br><br>HOSHI (星) means "star" in Japanese. We are a speciality coffee shop in the
+        heart
         of Madhapur, built for those who believe a great cup of coffee deserves unhurried attention.</p>
-      <a href="https://www.instagram.com/hoshi.hyd" target="_blank" rel="noopener" class="bs-link">Follow @hoshi.hyd on
+      <a href="https://www.instagram.com/hoshi.hyd" target="_blank" rel="noopener" class="bs-link">Follow @hoshi.hyd
+        on
         Instagram →</a>
     </div>
   </section>
@@ -2762,7 +2804,7 @@
       <!-- Col 1 — Hours (moved to first) -->
       <div class="visit-col reveal">
         <p class="vc-lbl">Hours</p>
-        <h3 class="vc-title">Open<br>Daily</h3>
+        <h3 class="vc-title">Open Daily</h3>
         <ul class="hrs-list">
           <li class="hr">
             <span class="hr-day">Mon – Thu</span>
@@ -2787,7 +2829,7 @@
       <!-- Col 2 — Location -->
       <div class="visit-col reveal rd1">
         <p class="vc-lbl">Find Us</p>
-        <h3 class="vc-title">Visit<br>Hoshi</h3>
+        <h3 class="vc-title">Visit Hoshi</h3>
         <ul class="vc-address">
           <li class="addr-bold">Madhapur</li>
           <li>Survey 3P, Circle 20</li>
@@ -2802,19 +2844,56 @@
       <!-- Col 3 — Contact -->
       <div class="visit-col reveal rd2">
         <p class="vc-lbl">Contact</p>
-        <h3 class="vc-title">Get In<br>Touch</h3>
+        <h3 class="vc-title">Get In Touch</h3>
         <ul class="ct-list">
           <li class="ct-item">
             <span class="ct-item-label">Phone</span>
             <a href="tel:+919542202202">+91 95422 02202</a>
           </li>
           <li class="ct-item">
-            <span class="ct-item-label">Instagram</span>
-            <a href="https://www.instagram.com/hoshi.hyd" target="_blank" rel="noopener">@hoshi.hyd</a>
-          </li>
-          <li class="ct-item">
             <span class="ct-item-label">Directions</span>
             <a href="https://maps.app.goo.gl/TZ9jqHxDcumjr7Ee9" target="_blank" rel="noopener">Google Maps</a>
+          </li>
+          <li class="ct-item ct-social-item">
+            <span class="ct-item-label">Follow Us</span>
+            <div class="ct-social-row">
+              <a href="https://www.instagram.com/hoshi.hyd" target="_blank" rel="noopener" class="ct-social-link"
+                aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+                <span>@hoshi.hyd</span>
+              </a>
+              <a href="https://www.zomato.com/hyderabad/hoshi-madhapur" target="_blank" rel="noopener"
+                class="ct-social-link" aria-label="Zomato">
+                <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm5 11H7v-1c0-2.67 3.33-4 5-4s5 1.33 5 4v1z" />
+                </svg>
+                <span>Zomato</span>
+              </a>
+              <a href="https://www.swiggy.com/city/hyderabad/hoshi-madhapur" target="_blank" rel="noopener"
+                class="ct-social-link" aria-label="Swiggy">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M12 2a8 8 0 0 1 8 8c0 5-8 12-8 12S4 15 4 10a8 8 0 0 1 8-8z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>Swiggy</span>
+              </a>
+              <a href="https://g.page/hoshi-hyd" target="_blank" rel="noopener" class="ct-social-link"
+                aria-label="Google">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path
+                    d="M21 10.5H12v3h5.2A5 5 0 0 1 7 12a5 5 0 0 1 5-5 5 5 0 0 1 3.2 1.1l2.1-2.1A9 9 0 1 0 21 10.5z" />
+                </svg>
+                <span>Google</span>
+              </a>
+            </div>
           </li>
         </ul>
       </div>
