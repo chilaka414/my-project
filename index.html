@@ -1240,6 +1240,7 @@
       grid-template-columns: 1.1fr 0.9fr 1fr;
       position: relative;
       z-index: 2;
+      overflow: hidden;
     }
 
     .visit-col {
@@ -1248,6 +1249,7 @@
       display: flex;
       flex-direction: column;
       min-height: 420px;
+      overflow: hidden;
     }
 
     .visit-col:last-child {
@@ -1355,6 +1357,8 @@
     .hrs-list {
       list-style: none;
       flex: 1;
+      padding: 0;
+      margin: 0;
     }
 
     .hr {
@@ -1418,6 +1422,8 @@
     .ct-list {
       list-style: none;
       flex: 1;
+      padding: 0;
+      margin: 0;
     }
 
     .ct-item {
@@ -1472,36 +1478,70 @@
     }
 
     .ct-social-item .ct-social-row {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 4px;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 0;
+      margin-top: 8px;
+      width: 100%;
     }
 
     .ct-social-link {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--light);
+      font-size: 12.5px;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      text-decoration: none;
+      transition: color .3s, border-color .3s;
+    }
+
+    .ct-social-link:first-child {
+      border-top: 1px solid var(--light);
+    }
+
+    .ct-social-link-left {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 13px;
-      color: var(--black);
-      text-decoration: none;
-      transition: color .3s;
+    }
+
+    .ct-social-arrow {
+      font-size: 11px;
+      color: var(--mid);
+      transition: transform .3s, color .3s;
+      display: inline-block;
     }
 
     .ct-social-link svg {
-      width: 18px;
-      height: 18px;
+      width: 22px;
+      height: 22px;
       flex-shrink: 0;
-      color: var(--gray);
-      transition: color .3s;
+      border-radius: 6px;
+      transition: transform .3s;
     }
 
     .ct-social-link:hover {
       color: var(--gray);
     }
 
-    .ct-social-link:hover svg {
+    .ct-social-link:hover .ct-social-arrow {
+      transform: translate(3px, -3px);
       color: var(--black);
+    }
+
+    .ct-social-link:hover svg {
+      transform: scale(1.08);
+    }
+
+    .ct-social-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     /* override the generic ct-item a::after arrow for social links */
@@ -1510,7 +1550,7 @@
     }
 
     /* Bottom strip */
-    .visit-footer-strip {
+    .visit--strip {
       border-top: 1px solid var(--light);
       padding: 24px 80px;
       display: flex;
@@ -1583,6 +1623,7 @@
         border-right: none;
         border-bottom: 1px solid var(--light);
         min-height: auto;
+        overflow: hidden;
       }
 
       .visit-col:last-child {
@@ -1947,7 +1988,31 @@
       transition-delay: .3s;
     }
 
-    /* RESPONSIVE */
+    /* Mobile hero CTA overlay — hidden everywhere, not used */
+    .hero-mobile-cta {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .h-cta {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        gap: 16px;
+      }
+
+      .h-cta .btn-blk {
+        flex: 0 0 auto;
+      }
+
+      .h-cta .btn-txt {
+        flex: 0 0 auto;
+        justify-content: flex-end;
+      }
+    }
+
     @media (max-width: 900px) {
       .hero {
         grid-template-columns: 1fr;
@@ -2265,6 +2330,11 @@
       <div class="hr-scroll">
         <div class="scroll-bar"></div>
         <span class="scroll-lbl">Scroll</span>
+      </div>
+      <!-- Mobile-only CTA buttons overlaid on hero image -->
+      <div class="hero-mobile-cta">
+        <a href="#menu" class="hmcta-left">Our Menu</a>
+        <a href="#visit" class="hmcta-right">Find Us</a>
       </div>
     </div>
   </section>
@@ -2831,9 +2901,9 @@
         <p class="vc-lbl">Find Us</p>
         <h3 class="vc-title">Visit Hoshi</h3>
         <ul class="vc-address">
-          <li class="addr-bold">Madhapur</li>
-          <li>Survey 3P, Circle 20</li>
-          <li>Hyderabad — 500 081</li>
+          <li class="addr-bold">Road No. 11, Kakatiya Hills</li>
+          <li>Madhapur</li>
+          <li>Hyderabad — 500081</li>
           <li>Telangana, India</li>
         </ul>
         <a href="https://maps.app.goo.gl/TZ9jqHxDcumjr7Ee9" target="_blank" rel="noopener" class="vc-map-link">Open in
@@ -2848,7 +2918,7 @@
         <ul class="ct-list">
           <li class="ct-item">
             <span class="ct-item-label">Phone</span>
-            <a href="tel:+919542202202">+91 95422 02202</a>
+            <a href="tel:+919542202202">+91 9542202202</a>
           </li>
           <li class="ct-item">
             <span class="ct-item-label">Directions</span>
@@ -2857,41 +2927,64 @@
           <li class="ct-item ct-social-item">
             <span class="ct-item-label">Follow Us</span>
             <div class="ct-social-row">
-              <a href="https://www.instagram.com/hoshi.hyd" target="_blank" rel="noopener" class="ct-social-link"
-                aria-label="Instagram">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                  stroke-linejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                </svg>
-                <span>@hoshi.hyd</span>
+              <!-- Instagram -->
+              <a href="https://www.instagram.com/hoshi.hyd" target="_blank" rel="noopener" class="ct-social-link" aria-label="Instagram">
+                <span class="ct-social-left">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
+                    <defs>
+                      <radialGradient id="ig-rg" cx="30%" cy="107%" r="130%">
+                        <stop offset="0%" stop-color="#ffd676"/>
+                        <stop offset="25%" stop-color="#f86f3d"/>
+                        <stop offset="50%" stop-color="#e1306c"/>
+                        <stop offset="75%" stop-color="#833ab4"/>
+                        <stop offset="100%" stop-color="#405de6"/>
+                      </radialGradient>
+                    </defs>
+                    <rect width="24" height="24" rx="6" fill="url(#ig-rg)"/>
+                    <rect x="4.5" y="4.5" width="15" height="15" rx="3.5" fill="none" stroke="white" stroke-width="1.8"/>
+                    <circle cx="12" cy="12" r="4.2" fill="none" stroke="white" stroke-width="1.8"/>
+                    <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+                  </svg>
+                  @hoshi.hyd
+                </span>
+                <span class="ct-social-arrow">↗</span>
               </a>
-              <a href="https://www.zomato.com/hyderabad/hoshi-madhapur" target="_blank" rel="noopener"
-                class="ct-social-link" aria-label="Zomato">
-                <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                  <path
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm5 11H7v-1c0-2.67 3.33-4 5-4s5 1.33 5 4v1z" />
-                </svg>
-                <span>Zomato</span>
+              <!-- Zomato -->
+              <a href="https://www.zomato.com/hyderabad/hoshi-madhapur" target="_blank" rel="noopener" class="ct-social-link" aria-label="Zomato">
+                <span class="ct-social-left">
+                  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
+                    <rect width="48" height="48" rx="10" fill="#E23744"/>
+                    <text x="50%" y="31" text-anchor="middle" font-family="'Arial Rounded MT Bold','Helvetica Neue',Arial,sans-serif" font-weight="900" font-size="16" fill="white" letter-spacing="-0.5">zomato</text>
+                  </svg>
+                  Zomato
+                </span>
+                <span class="ct-social-arrow">↗</span>
               </a>
-              <a href="https://www.swiggy.com/city/hyderabad/hoshi-madhapur" target="_blank" rel="noopener"
-                class="ct-social-link" aria-label="Swiggy">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                  stroke-linejoin="round">
-                  <path d="M12 2a8 8 0 0 1 8 8c0 5-8 12-8 12S4 15 4 10a8 8 0 0 1 8-8z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                <span>Swiggy</span>
+              <!-- Swiggy -->
+              <a href="https://www.swiggy.com/city/hyderabad/hoshi-madhapur" target="_blank" rel="noopener" class="ct-social-link" aria-label="Swiggy">
+                <span class="ct-social-left">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
+                    <rect width="24" height="24" rx="5" fill="#FC8019"/>
+                    <path d="M12 5C8.5 5 6 7.8 6 11c0 3.5 3 6.5 6 8 3-1.5 6-4.5 6-8 0-3.2-2.5-6-6-6z" fill="white" opacity="0.95"/>
+                    <circle cx="12" cy="11" r="2.5" fill="#FC8019"/>
+                  </svg>
+                  Swiggy
+                </span>
+                <span class="ct-social-arrow">↗</span>
               </a>
-              <a href="https://g.page/hoshi-hyd" target="_blank" rel="noopener" class="ct-social-link"
-                aria-label="Google">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                  stroke-linejoin="round">
-                  <path
-                    d="M21 10.5H12v3h5.2A5 5 0 0 1 7 12a5 5 0 0 1 5-5 5 5 0 0 1 3.2 1.1l2.1-2.1A9 9 0 1 0 21 10.5z" />
-                </svg>
-                <span>Google</span>
+              <!-- Google -->
+              <a href="https://g.page/hoshi-hyd" target="_blank" rel="noopener" class="ct-social-link" aria-label="Google">
+                <span class="ct-social-left">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
+                    <rect width="24" height="24" rx="5" fill="white" stroke="#e8e8e8" stroke-width="1"/>
+                    <path d="M20.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h4.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                    <path d="M12 21c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 18.53 7.7 21 12 21z" fill="#34A853"/>
+                    <path d="M5.84 12.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V5.06H2.18C1.43 6.55 1 8.22 1 10s.43 3.45 1.18 4.94l3.66-2.84z" fill="#FBBC05"/>
+                    <path d="M12 4.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45.09 14.97-1 12-1 7.7-1 3.99 1.47 2.18 5.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                  </svg>
+                  Google Reviews
+                </span>
+                <span class="ct-social-arrow">↗</span>
               </a>
             </div>
           </li>
